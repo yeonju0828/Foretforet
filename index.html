@@ -11,10 +11,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      margin: 0;
       padding: 20px 0;
+      margin: 0;
     }
 
     h1 {
@@ -35,7 +33,7 @@
 
     .card {
       width: 100%;
-      aspect-ratio: 2 / 3; /* 2:3 비율 유지 */
+      aspect-ratio: 2 / 3; /* 카드 비율 유지 */
       position: relative;
       transform-style: preserve-3d;
       transition: transform 0.6s;
@@ -127,9 +125,14 @@
       const currentPairs = allPairs.slice(0, pairCount * 2);
       const shuffled = [...currentPairs].sort(() => 0.5 - Math.random());
 
-      // 카드 개수에 따라 컬럼 수 동적 설정
-      const columnCount = stage + 1;
-      board.style.gridTemplateColumns = `repeat(${columnCount}, 1fr)`;
+      // 단계별로 칼럼 수 고정
+      if (stage === 1) {
+        board.style.gridTemplateColumns = "repeat(2, 1fr)";
+      } else if (stage === 2) {
+        board.style.gridTemplateColumns = "repeat(3, 1fr)";
+      } else {
+        board.style.gridTemplateColumns = "repeat(4, 1fr)";
+      }
 
       shuffled.forEach((item) => {
         const card = document.createElement("div");
@@ -210,5 +213,6 @@
 
     startStage();
   </script>
-</bod
+</body>
+</html>
 
