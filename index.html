@@ -25,18 +25,19 @@
 
     .game-board {
       display: grid;
-      gap: 1.5vw;
+      gap: 1.2vw;
       justify-content: center;
-      align-content: center;
       justify-items: center;
+      align-content: start;
       align-items: center;
       width: 90vw;
       perspective: 1000px;
       margin-bottom: 20px;
+      grid-auto-rows: 30vw;
     }
 
     .card {
-      width: 22vw;
+      width: 20vw;
       height: 30vw;
       position: relative;
       transform-style: preserve-3d;
@@ -89,7 +90,7 @@
     }
 
     .empty {
-      width: 22vw;
+      width: 20vw;
       height: 30vw;
       visibility: hidden;
     }
@@ -127,11 +128,10 @@
       flippedCards = [];
       matchedCount = 0;
 
-      const pairCount = stage + 1; // 1단계=2쌍, 2단계=3쌍, 3단계=4쌍
+      const pairCount = stage + 1;
       const currentPairs = allPairs.slice(0, pairCount * 2);
       const shuffled = [...currentPairs].sort(() => 0.5 - Math.random());
 
-      // 카드 배치 레이아웃 설정
       if (stage === 1) {
         board.style.gridTemplateColumns = "repeat(2, 1fr)";
       } else if (stage === 2) {
@@ -169,7 +169,6 @@
         board.appendChild(card);
       });
 
-      // 2단계일 때 빈칸 3개 추가해서 3x3 유지
       if (stage === 2) {
         const emptyCount = 9 - shuffled.length;
         for (let i = 0; i < emptyCount; i++) {
